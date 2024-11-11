@@ -17,7 +17,6 @@ public class ProductController {
     private final GetAllProductsInbound getAllProductsInbound;
     private final GetProductByIdInbound getProductByIdInbound;
     private final UpdateProductInbound updateProductInbound;
-    private final GetProductDatabaseStateInbound getProductDatabaseStateInbound;
 
     @GetMapping
     public List<Product> getAllProducts() {
@@ -47,10 +46,5 @@ public class ProductController {
         Product product = getProductByIdInbound.execute(id)
                 .orElseThrow(() -> new ProductNotFoundException("Product not found with id: " + id));
         deleteProductInbound.execute(product.getId());
-    }
-
-    @GetMapping("/info/database-state")
-    public String getDatabaseState() {
-        return getProductDatabaseStateInbound.execute();
     }
 }
