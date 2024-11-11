@@ -44,26 +44,4 @@ public class ProductRepositoryAdapter implements ProductRepository {
         productRepositoryJpa.deleteById(id);
         log.info("Product with id: {} deleted", id);
     }
-
-    @Override
-    public String getProductDatabaseState() {
-        StringBuilder state = new StringBuilder("Current Database State:\n");
-        List<Product> products = productRepositoryJpa.findAll();
-        if (products.isEmpty()) {
-            state.append("No products stored.\n");
-        } else {
-            for (Product product : products) {
-                state.append(String.format(
-                        "ID: %d, Name: %s, Description: %s, Price: %.2f, InStock: %s%n",
-                        product.getId(),
-                        product.getName(),
-                        product.getDescription(),
-                        product.getPrice(),
-                        product.getInStock()
-                ));
-            }
-        }
-        log.info(state.toString());
-        return state.toString();
-    }
 }

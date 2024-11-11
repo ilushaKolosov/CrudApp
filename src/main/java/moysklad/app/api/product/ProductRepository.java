@@ -12,5 +12,4 @@ public interface ProductRepository {
     Product save(Product product);
     void deleteById(Long id);
     Product update(Product product);
-    String getProductDatabaseState();
 }
