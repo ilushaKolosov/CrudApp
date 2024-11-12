@@ -1,4 +1,4 @@
-package moysklad.app.impl.exception;
+package moysklad.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -2,7 +2,7 @@ package moysklad.adapter.rest;
 
 import lombok.RequiredArgsConstructor;
 import moysklad.app.api.product.*;
-import moysklad.app.impl.exception.ProductNotFoundException;
+import moysklad.exception.ProductNotFoundException;
 import moysklad.domain.Product;
 import org.springframework.web.bind.annotation.*;
 

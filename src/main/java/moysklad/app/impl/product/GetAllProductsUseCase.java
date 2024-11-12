@@ -13,6 +13,7 @@ import java.util.List;
 public class GetAllProductsUseCase implements GetAllProductsInbound {
     private final ProductRepository productRepository;
 
+    @Override
     public List<Product> execute() {
         return productRepository.findAll();
     }
