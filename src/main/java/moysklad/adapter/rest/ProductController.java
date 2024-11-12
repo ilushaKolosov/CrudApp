@@ -1,6 +1,7 @@
 package moysklad.adapter.rest;
 
 import lombok.RequiredArgsConstructor;
+import moysklad.adapter.dto.GetProductsDto;
 import moysklad.app.api.product.*;
 import moysklad.app.impl.exception.ProductNotFoundException;
 import moysklad.domain.Product;
@@ -19,8 +20,16 @@ public class ProductController {
     private final UpdateProductInbound updateProductInbound;
 
     @GetMapping
-    public List<Product> getAllProducts() {
-        return getAllProductsInbound.execute();
+    public List<Product> getAllProducts(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Double priceMin,
+            @RequestParam(required = false) Double priceMax,
+            @RequestParam(required = false) Boolean inStock,
+            @RequestParam(required = false) String sortBy,
+            @RequestParam(required = false) Integer limit
+    ) {
+        GetProductsDto request = new GetProductsDto(name, priceMin, priceMax, inStock, sortBy, limit);
+        return getAllProductsInbound.execute(request);
     }
 
     @GetMapping("/{id}")
