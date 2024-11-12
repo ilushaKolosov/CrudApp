@@ -1,8 +1,8 @@
-package moysklad.app.impl.exception.aspect;
+package moysklad.exception.aspect;
 
 import lombok.extern.slf4j.Slf4j;
-import moysklad.app.impl.exception.ErrorResponse;
-import moysklad.app.impl.exception.ProductNotFoundException;
+import moysklad.exception.ErrorResponse;
+import moysklad.exception.ProductNotFoundException;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.http.HttpStatus;
