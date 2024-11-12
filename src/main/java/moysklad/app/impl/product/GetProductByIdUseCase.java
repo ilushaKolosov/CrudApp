@@ -14,6 +14,7 @@ import java.util.Optional;
 public class GetProductByIdUseCase implements GetProductByIdInbound {
     private final ProductRepository productRepository;
 
+    @Override
     public Optional<Product> execute(Long id) {
         return productRepository.findById(id);
     }

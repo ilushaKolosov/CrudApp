@@ -1,8 +1,10 @@
-package moysklad.app.impl.exception.aspect;
+package moysklad.exception.aspect;
 
 import lombok.extern.slf4j.Slf4j;
-import moysklad.app.impl.exception.ErrorResponse;
-import moysklad.app.impl.exception.ProductNotFoundException;
+import moysklad.exception.ErrorResponse;
+import moysklad.exception.ProductNotFoundException;
+import moysklad.exception.ProductSaleNotFoundException;
+import moysklad.exception.ProductSupplyNotFoundException;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,20 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ProductNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleProductNotFoundException(ProductNotFoundException ex) {
         log.error("Product not found: {}", ex.getMessage());
+        ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), HttpStatus.NOT_FOUND.value());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
+
+    @ExceptionHandler(ProductSupplyNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleProductSupplyNotFoundException(ProductSupplyNotFoundException ex) {
+        log.error("Product supply not found: {}", ex.getMessage());
+        ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), HttpStatus.NOT_FOUND.value());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
+
+    @ExceptionHandler(ProductSaleNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleProductSaleNotFoundException(ProductSaleNotFoundException ex) {
+        log.error("Product sale not found: {}", ex.getMessage());
         ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), HttpStatus.NOT_FOUND.value());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }

@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Entity
 @Table(name = "products")
 @Getter
@@ -22,6 +24,7 @@ public class Product {
     private String description;
     private Double price;
     private Boolean inStock;
+    private Integer quantity;
 
     public void setName(String name) {
         if (name == null || name.length() > 255) {
@@ -45,17 +48,19 @@ public class Product {
     }
 
     public void setInStock(Boolean inStock) {
+        if (this.inStock != null && !this.inStock.equals(inStock)) {
+            log.info("Product stock status changed for {}. Old: {}, New: {}", this.name, this.inStock, inStock);
+        }
         this.inStock = inStock != null ? inStock : false;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                ", inStock=" + inStock +
-                '}';
+    public void setQuantity(Integer quantity) {
+        if (quantity == null) {
+            this.quantity = 0;
+            return;
+        } else if (quantity < 0) {
+            throw new IllegalArgumentException("Product quantity cannot be negative.");
+        }
+        this.quantity = quantity;
     }
 }
