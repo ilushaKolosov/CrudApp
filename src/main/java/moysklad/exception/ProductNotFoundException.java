@@ -1,4 +1,4 @@
-package moysklad.app.impl.exception;
+package moysklad.exception;
 
 public class ProductNotFoundException extends RuntimeException {
     public ProductNotFoundException(String message) {
