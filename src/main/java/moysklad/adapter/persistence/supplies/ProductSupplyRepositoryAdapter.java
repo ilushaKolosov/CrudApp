@@ -17,26 +17,33 @@ public class ProductSupplyRepositoryAdapter implements ProductSupplyRepository {
 
     @Override
     public List<ProductSupply> findAll() {
+        log.info("Fetching all product supplies.");
         return productSupplyRepositoryJpa.findAll();
     }
 
     @Override
     public Optional<ProductSupply> findById(Long id) {
+        log.info("Fetching product supply with id: {}", id);
         return productSupplyRepositoryJpa.findById(id);
     }
 
     @Override
-    public ProductSupply save(ProductSupply product) {
-        return productSupplyRepositoryJpa.save(product);
+    public ProductSupply save(ProductSupply productSupply) {
+        ProductSupply savedSupply = productSupplyRepositoryJpa.save(productSupply);
+        log.info("Product supply saved with id: {}", savedSupply.getId());
+        return savedSupply;
     }
 
     @Override
     public void deleteById(Long id) {
         productSupplyRepositoryJpa.deleteById(id);
+        log.info("Product supply with id: {} deleted", id);
     }
 
     @Override
-    public ProductSupply update(ProductSupply product) {
-        return productSupplyRepositoryJpa.save(product);
+    public ProductSupply update(ProductSupply productSupply) {
+        ProductSupply updatedSupply = productSupplyRepositoryJpa.save(productSupply);
+        log.info("Product supply updated with id: {}", updatedSupply.getId());
+        return updatedSupply;
     }
 }
