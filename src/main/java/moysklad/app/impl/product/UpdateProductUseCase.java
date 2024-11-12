@@ -5,6 +5,7 @@ import moysklad.app.api.product.ProductRepository;
 import moysklad.app.api.product.UpdateProductInbound;
 import moysklad.domain.Product;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -13,6 +14,8 @@ import java.util.Optional;
 public class UpdateProductUseCase implements UpdateProductInbound {
     private final ProductRepository productRepository;
 
+    @Override
+    @Transactional
     public Product execute(Product product) {
         Product existingProduct = productRepository.findById(product.getId())
                 .orElseThrow(() -> new IllegalArgumentException("Product with ID " + product.getId() + " does not exist."));
