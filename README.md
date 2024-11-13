@@ -36,7 +36,3 @@ Path Variables:
 id (Long): The ID of the product to delete.
 Response: Returns a 204 No Content status if the deletion is successful.
 Error: If the product is not found, returns a 404 Not Found status with a ProductNotFoundException.
-6. Get Database State
-Endpoint: GET /products/info/database-state
-Description: Retrieves information about the current state of the product database.
-Response: Returns a String message indicating the database state.
